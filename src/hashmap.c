@@ -20,18 +20,13 @@ int contains(const char* name,hashmap_t* map){
   return strcmp(name,node->name);
 }
 
-int put(node_t* node,hashmap_t* map){
+void put(node_t* node,hashmap_t* map){
   size_t hash = hashing(node->name,map->map_size);
-  if (strcmp(node->name, map->map[hash]->name)){
-    return 0;
-  }
-  free(map->map[hash]);
   map->map[hash] = node;
-  return 1;
 }
 
-node_t* get(node_t* node,hashmap_t* map){
-  size_t hash = hashing(node->name,map->map_size);
+node_t* get(const char* node_name,hashmap_t* map){
+  size_t hash = hashing(node_name,map->map_size);
   return map->map[hash];
 }
 

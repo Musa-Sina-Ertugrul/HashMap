@@ -20,9 +20,9 @@ size_t hashing(const char* name, size_t map_size);
 
 int contains(const char* name,hashmap_t* map);
 
-int put(node_t* node,hashmap_t* map);
+void put(node_t* node,hashmap_t* map);
 
-node_t* get(node_t* node,hashmap_t* map);
+node_t* get(const char* node_name,hashmap_t* map);
 
 
 #endif
