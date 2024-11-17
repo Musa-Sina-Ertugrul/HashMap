@@ -10,4 +10,4 @@ hashmap.so : $(SRC_DIR)/hashmap.c $(INCLUDE_DIR)/hashmap.h
 	gcc -o main main.c -L. -lhashmap -I$(INCLUDE_DIR) -Wl,-rpath=.
 
 clean:
-	rm -rf hashmap.o hashmap.so
+	rm -rf hashmap.o libhashmap.so
