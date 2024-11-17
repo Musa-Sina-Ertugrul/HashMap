@@ -16,16 +16,26 @@ size_t hashing(const char* name, size_t map_size){
 
 int contains(const char* name,hashmap_t* map){
   size_t hash = hashing(name,map->map_size);
+  if (map->map[hash]==NULL){
+    return 0;
+  } 
   node_t* node = map->map[hash];
-  return strcmp(name,node->name);
+  return strcmp(name,node->name)==0;
 }
 
-void put(node_t* node,hashmap_t* map){
+int put(node_t* node,hashmap_t* map){
+  if (node == NULL){
+    return 0;
+  }
   size_t hash = hashing(node->name,map->map_size);
   map->map[hash] = node;
+  return 1;
 }
 
 node_t* get(const char* node_name,hashmap_t* map){
+  if (!contains(node_name,map)){
+    return NULL;
+  } 
   size_t hash = hashing(node_name,map->map_size);
   return map->map[hash];
 }
