@@ -3,6 +3,26 @@
 #include <string.h>
 #include "hashmap.h"
 
+node_name_state_t* seperate_name_state(const char* name)
+{
+
+  size_t name_len = strlen(name);
+  char* super_states = (char*)calloc(name_len + 1, sizeof(char));
+  super_states = strcpy(super_states, name);
+  size_t index = 0;
+  char c;
+
+  while ((c = name[index++]) != '_') { }
+
+  node_name_state_t* result;
+  result->state = super_states;
+  super_states[index] = '\0';
+  result->name = &super_states[index];
+  result->name++;
+
+  return result;
+}
+
 size_t hashing(const char* name, size_t map_size){
   unsigned long hash = 5381;
   int c;
