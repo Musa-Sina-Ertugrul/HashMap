@@ -12,8 +12,7 @@ typedef struct {
 
 typedef struct {
   node_t** map;
-  size_t map_size;
-  int item_count;
+  size_t size;
 } hashmap_t;
 
 size_t hashing(const char* name, size_t map_size);
@@ -22,7 +21,7 @@ int contains(const char* name, hashmap_t* map);
 
 int put(node_t* node, hashmap_t* map);
 
-node_t* get(const char* node_name, hashmap_t* map);
+node_t* get(const char* name, hashmap_t* map);
 
 #ifdef SUPER
 
@@ -31,7 +30,9 @@ typedef struct {
   char* state;
 } node_name_state_t;
 
-node_t* get_name_w_states(const char* node_name, hashmap_t* map);
+int put_name_w_states(node_t* node, hashmap_t* map);
+
+int check_states(const char* name,const char* state);
 
 node_name_state_t* seperate_name_state(const char* name);
 
