@@ -50,12 +50,12 @@ int contains(const char* name, hashmap_t* map)
   }
   node_t* node = map->map[hash];
   node_name_state_t* node_name = seperate_name_state(node->name);
+
   if (node_name){
     int result = (strcmp(name, node_name->name) == 0);
     free(node_name->state);
     return result;
   }
-  free(node_name->state);
   return strcmp(name,node->name) == 0;
 }
 
@@ -99,10 +99,14 @@ int put_name_w_states(node_t* node, hashmap_t* map)
 {
 
   if (!check_states(node->name, "s_")) {
-    fprintf(stderr, "s | _ is not in the name, it is not super, use put\n");
+    fprintf(stderr, "ERROR: s | _ is not in the name, it is not super, use put \n");
     return 0;
   }
   node_name_state_t* name = seperate_name_state(node->name);
+  if (name == NULL) {
+    fprintf(stderr,"ERROR: node name could not seperated \n");
+    return 0;
+  }
   size_t hash = hashing(name->name, map->size);
   map->map[hash] = node;
   free(name->state);
